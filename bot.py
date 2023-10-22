@@ -4,7 +4,7 @@ import interactions
 from interactions import slash_command, SlashContext, listen, Intents, slash_option, OptionType, SlashCommandChoice
 
 intents = Intents.ALL
-client = interactions.Client(intents=intents)
+client = interactions.Client(intents=intents,status=interactions.Status.ONLINE,activity=interactions.Activity(name="Yggdrasil sucks", type=interactions.ActivityType.GAME))
 userphone = True
 
 @interactions.listen()
