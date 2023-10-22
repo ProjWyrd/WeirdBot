@@ -1,11 +1,16 @@
 import asyncio
 import random
 import interactions
+import os
 from interactions import slash_command, SlashContext, listen, Intents, slash_option, OptionType, SlashCommandChoice
+from dotenv import load_dotenv
 
 intents = Intents.ALL
 client = interactions.Client(intents=intents,status=interactions.Status.ONLINE,activity=interactions.Activity(name="Yggdrasil sucks", type=interactions.ActivityType.GAME))
 userphone = True
+
+load_dotenv()
+token = os.getenv('DISCORD_TOKEN')
 
 @interactions.listen()
 async def on_startup():
@@ -57,6 +62,17 @@ async def toggleuserphone(ctx: SlashContext, toggle: bool):
         userphone = False
         await ctx.send("Userphone timer is now turned Off.")       
 
+@slash_command(name="ping", description="Pong!")
+async def ping(ctx: SlashContext):
+    await ctx.send('Pong! {0}'.format(round(client.latency, 3)))
+
+@slash_command(name="shutdown", description="Shutdown the bot.")
+async def shutdown(ctx: SlashContext):
+    if ctx.user.id == 824240215577067541:
+        await ctx.send("Shutting down...")
+        await client.stop()
+    else:
+        await ctx.send("You do not have permision to do this.")
 
 @listen()
 async def on_message_create(event):
@@ -76,4 +92,4 @@ async def on_message_create(event):
             await event.message.reply('Ready to `--userphone` again!', mention_author=True)
             await event.message.remove_reaction(emoji,client.user)
 
-client.start("")
+client.start(token)
