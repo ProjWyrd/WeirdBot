@@ -91,5 +91,11 @@ async def on_message_create(event):
             await asyncio.sleep(5)
             await event.message.reply('Ready to `--userphone` again!', mention_author=True)
             await event.message.remove_reaction(emoji,client.user)
+        if "The userphone connection has been lost" in event.message.content:
+            emoji = '\N{HOURGLASS WITH FLOWING SAND}'
+            await event.message.add_reaction(emoji)
+            await asyncio.sleep(15)
+            await event.message.reply('Ready to `--userphone` again!', mention_author=True)
+            await event.message.remove_reaction(emoji,client.user)
 
 client.start(token)
