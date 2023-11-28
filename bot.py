@@ -82,7 +82,7 @@ async def on_message_create(event):
         if "You hung up the userphone" in event.message.content:
             emoji = '\N{HOURGLASS WITH FLOWING SAND}'
             await event.message.add_reaction(emoji)
-            await asyncio.sleep(50)
+            await asyncio.sleep(20)
             await event.message.reply('Ready to `--userphone` again!', mention_author=True)
             await event.message.remove_reaction(emoji,client.user)
         if "The other party hung up the userphone" in event.message.content:
@@ -94,7 +94,7 @@ async def on_message_create(event):
         if "The userphone connection has been lost" in event.message.content:
             emoji = '\N{HOURGLASS WITH FLOWING SAND}'
             await event.message.add_reaction(emoji)
-            await asyncio.sleep(15)
+            await asyncio.sleep(20)
             await event.message.reply('Ready to `--userphone` again!', mention_author=True)
             await event.message.remove_reaction(emoji,client.user)
 
