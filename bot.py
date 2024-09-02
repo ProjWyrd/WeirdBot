@@ -38,6 +38,12 @@ async def randomnum(ctx: SlashContext, minnum: int, maxnum: int):
     if minnum < 0:
         await ctx.send("Error: Minimun number cannot be less than 0")
         return
+    if maxnum < 0:
+        await ctx.send("Error: Maximun number cannot be less than 0")
+        return
+    elif maxnum == minnum:
+        await ctx.send(f"Your not so random number is: {minnum}")
+        return
     else:
         randomout = random.randrange(minnum, maxnum)
         await ctx.send(f"Your random number is: {randomout}")
